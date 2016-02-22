@@ -1,0 +1,7 @@
+#test
+dist
+.sass-cache
+.jekyll-metadata
+.DS_Store
+node_modules
+private
