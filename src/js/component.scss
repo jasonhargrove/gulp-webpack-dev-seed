@@ -1,0 +1,21 @@
+header {
+  $margin: 10px;
+
+  background: #000;
+  clear: both;
+  color: #fff;
+  height: 100px;
+  position: relative;
+
+  img {
+    float: left;
+    margin: $margin $margin;
+    width: 80px;
+  }
+
+  div {
+    float: right;
+    font-size: 28px;
+    padding: 30px $margin;
+  }
+}

@@ -64,7 +64,7 @@ gulp.task('js', ['lint'], function () {
     .pipe(webpack(webpackConfig))
     .on('error', errorGraceful)
     .pipe(rename('bundle.js'))
-    .pipe(gulp.dest('./test/js'))
+    .pipe(gulp.dest('test/js'))
     .pipe(browserSync.reload({ stream: true }));
 });
 
@@ -72,7 +72,7 @@ gulp.task('sass', function () {
   gulp.src('src/sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(rename('bundle.css'))
-    .pipe(gulp.dest('./test/css'))
+    .pipe(gulp.dest('test/css'))
     .pipe(browserSync.stream());
 });
 
