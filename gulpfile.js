@@ -12,6 +12,7 @@ var htmlreplace = require('gulp-html-replace');
 var shell = require('gulp-shell');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var runSequence = require('run-sequence');
 var sass = require('gulp-sass');
 var symlink = require('gulp-sym');
 var webpack = require('webpack-stream');
@@ -30,11 +31,10 @@ function errorGraceful (error) {
  * tasks
  */
 
-gulp.task('build', ['clean'], function () {
-  gulp.start('html');
-  gulp.start('images');
-  gulp.start('js');
-  gulp.start('sass');
+gulp.task('build', function (cb) {
+  runSequence('clean',
+    ['html', 'images', 'js', 'sass'],
+    cb);
 });
 
 gulp.task('clean', function () {
@@ -60,7 +60,7 @@ gulp.task('images', function () {
 });
 
 gulp.task('js', ['lint'], function () {
-  gulp.src('src/js/**/*.js')
+  return gulp.src('src/js/**/*.js')
     .pipe(webpack(webpackConfig))
     .on('error', errorGraceful)
     .pipe(rename('bundle.js'))
@@ -69,7 +69,7 @@ gulp.task('js', ['lint'], function () {
 });
 
 gulp.task('sass', function () {
-  gulp.src('src/sass/**/*.scss')
+  return gulp.src('src/sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(rename('bundle.css'))
     .pipe(gulp.dest('test/css'))
